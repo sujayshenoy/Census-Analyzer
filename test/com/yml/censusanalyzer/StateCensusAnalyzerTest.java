@@ -1,9 +1,6 @@
 package com.yml.censusanalyzer;
 
 import static org.junit.Assert.assertEquals;
-
-import java.nio.file.Paths;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -22,12 +19,18 @@ public class StateCensusAnalyzerTest {
         int expected = 8;
         int actual = csv.getCensusData().getData().size();
         assertEquals(expected, actual);
+
+        path = "" + System.getenv("HOME") + "/Desktop/assignments/Census-Analyzer/data/stateCodes.csv";
+        csv.loadCSV(path);
+        expected = 36;
+        actual = csv.getCensusData().getData().size();
+        assertEquals(expected, actual);
     }
 
     @Test
     public void throwCustomExceptionIfFileNotFound() {
         try {
-            String path = "" + System.getenv("HOME") + "/Desktop/assignments/Census-Analyzer/data/nonExistingFile.csv";
+            String path = "" + System.getenv("HOME") + "/Desktop/assignments/Census-Analyzer/data/nonExisting.csv";
             csv.loadCSV(path);
         } catch (MyException e) {
             System.out.println(e.getMessage());
@@ -42,6 +45,9 @@ public class StateCensusAnalyzerTest {
         try {
             String path = "" + System.getenv("HOME") + "/Desktop/assignments/Census-Analyzer/data/stateCensus.dsv";
             csv.loadCSV(path);
+
+            path = "" + System.getenv("HOME") + "/Desktop/assignments/Census-Analyzer/data/stateCodes.dsv";
+            csv.loadCSV(path);
         } catch (MyException e) {
             System.out.println(e.getMessage());
             String expected = "Invalid File Type";
@@ -55,6 +61,9 @@ public class StateCensusAnalyzerTest {
         try {
             String path = "" + System.getenv("HOME") + "/Desktop/assignments/Census-Analyzer/data/stateCensusInvalidDelimitter.csv";
             csv.loadCSV(path);
+
+            path = "" + System.getenv("HOME") + "/Desktop/assignments/Census-Analyzer/data/stateCodesInvalidDelimitter.csv";
+            csv.loadCSV(path);
         } catch (MyException e) {
             System.out.println(e.getMessage());
             String expected = "Invalid Delimitters";
@@ -67,6 +76,9 @@ public class StateCensusAnalyzerTest {
     public void throwCustomExceptionIfInvalidHeader() {
         try {
             String path = "" + System.getenv("HOME") + "/Desktop/assignments/Census-Analyzer/data/stateCensusInvalidHeader.csv";
+            csv.loadCSV(path);
+
+            path = "" + System.getenv("HOME") + "/Desktop/assignments/Census-Analyzer/data/stateCodesInvalidHeader.csv";
             csv.loadCSV(path);
         } catch (MyException e) {
             System.out.println(e.getMessage());

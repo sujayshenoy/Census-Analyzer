@@ -4,7 +4,6 @@ import java.io.*;
 import java.util.List;
 
 import com.opencsv.CSVReader;
-import com.opencsv.exceptions.CsvException;
 
 public class CSVStateCensus {
     private CensusData censusData;
@@ -13,6 +12,11 @@ public class CSVStateCensus {
         censusData = null;
     }
 
+    /**
+     * Method to load data from csv files
+     * @param String
+     * @throws MyException
+     */
     public void loadCSV(String fileLocation) throws MyException {
         try {
             String fileType = fileLocation.substring(fileLocation.lastIndexOf("."));
