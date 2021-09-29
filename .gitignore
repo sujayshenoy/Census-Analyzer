@@ -1,6 +1,7 @@
 #eclipse
 .classpath
 .project
+.DS_Store
 
 #vscode
 .vscode
